@@ -43,7 +43,8 @@ vector<string> SplitIntoWords(string text)
                 words.push_back(word);
                 word = "";
             }
-        } else 
+        }
+        else 
         {
             word += c;
         }
@@ -122,14 +123,6 @@ public:
             throw invalid_argument("Document with this ID already exists");
         }
 
-        for (const char c : document) 
-        {
-            if (c >= '\0' && c < ' ') 
-            {
-                throw invalid_argument("Document contains invalid characters");
-            }
-        }
-
         const auto words = SplitIntoWordsNoStop(document);
         const double inv_word_count = 1.0 / words.size();
         for (const string& word : words) 
@@ -152,7 +145,8 @@ public:
             if (abs(lhs.relevance - rhs.relevance) < EPSILON) 
             {
                 return lhs.rating > rhs.rating;
-            } else 
+            } 
+            else 
             {
                 return lhs.relevance > rhs.relevance;
             }
@@ -285,10 +279,6 @@ private:
 
     QueryWord ParseQueryWord(const string& text) const 
     {
-        if (text.empty()) 
-        {
-            throw invalid_argument("Query word is empty"s);
-        }
         bool is_minus = false;
         string word = text;
         if (word[0] == '-') 
@@ -331,7 +321,8 @@ private:
             if (query_word.is_minus) 
             {
                 result.minus_words.insert(query_word.data);
-            } else 
+            } 
+            else 
             {
                 result.plus_words.insert(query_word.data);
             }
